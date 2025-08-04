@@ -19,6 +19,8 @@ model User {
   email    String  @unique
   password String
   posts    Post[]
+  dateIdeas DateIdea[] @relation("UserDateIdeas")
+  ideaLikes IdeaLike[]
 }
 
 model Post {
@@ -31,3 +33,27 @@ model Post {
   authorId  String?
   author    User?    @relation(fields: [authorId], references: [id])
 }
+
+/// -------------- New for Date Night feature --------------
+model DateIdea {
+  id          Int        @id @default(autoincrement())
+  createdAt   DateTime   @default(now())
+  title       String
+  description String?
+  image       String?
+  createdById String
+  createdBy   User       @relation(name: "UserDateIdeas", fields: [createdById], references: [id])
+  likes       IdeaLike[]
+}
+
+model IdeaLike {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  userId    String
+  ideaId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  idea      DateIdea  @relation(fields: [ideaId], references: [id])
+
+  @@unique([userId, ideaId])
+}
+
