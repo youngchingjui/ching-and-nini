@@ -13,22 +13,28 @@ export default function Header() {
           Superblog
         </Link>
         <div className="flex items-center space-x-4">
-          <Link 
-            href="/posts" 
+          <Link
+            href="/posts"
             className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
           >
             Posts
           </Link>
+          <Link
+            href="/date-ideas"
+            className="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition"
+          >
+            Date Ideas
+          </Link>
           {session ? (
             <>
-              <Link 
-                href="/posts/new" 
+              <Link
+                href="/posts/new"
                 className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
               >
                 New Post
               </Link>
               <div className="flex items-center space-x-4">
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-gray-500 text-right">
                   {session.user?.name && <div>{session.user.name}</div>}
                   <div>{session.user?.email}</div>
                 </div>
@@ -50,3 +56,4 @@ export default function Header() {
     </header>
   );
 }
+
